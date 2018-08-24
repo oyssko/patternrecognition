@@ -1,0 +1,1 @@
+from patternrecognition.classifiers.svm import Support_Vector_Machine
