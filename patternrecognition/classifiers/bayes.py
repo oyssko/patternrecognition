@@ -62,10 +62,9 @@ class BayesianClassifier2d:
         # Retrieving the probability for each point
         self.probability = np.zeros([self.classes, self.classes * self.num_samples])
         for num_class in range(self.classes):
-            for vector in range(self.classes * self.num_samples):
-                self.probability[num_class, vector] = self.gaussian_probability(self.combined[vector],
-                                                                                self.mean[num_class],
-                                                                                self.cov[num_class])
+            self.probability[num_class, :] = self.gaussian_probability(self.combined,
+                                                                       self.mean[num_class],
+                                                                       self.cov[num_class])
 
     def predict_data(self):
 
