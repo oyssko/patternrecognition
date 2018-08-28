@@ -1,1 +1,2 @@
 from patternrecognition.classifiers.svm import Support_Vector_Machine
+from patternrecognition.classifiers.bayes import BayesianClassifier2d
