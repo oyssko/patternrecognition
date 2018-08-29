@@ -119,15 +119,16 @@ class BayesianClassifier2d(object):
                     self.vec_distance[num_class, i] = self.distance(self.mean[num_class],
                                                                     self.combined[i], self.cov[num_class],
                                                                     method='mahalanobis')
-        return self.vec_distance
 
     def prediction_of_data(self, method='bayes'):
         # This calculates the most probable class for each vector using Bayes Decision theory and distance
         # measure
         # Predicted class
         if method == 'bayes':
+            self.calculate_probability()
             self.class_predict = self.probability.argmax(axis=0)
         elif method == 'distance':
+            self.calculate_distance()
             self.class_predict = self.vec_distance.argmin(axis=0)
         else:
             print('Choose method as either  \'bayes\' or \'distance\'')
