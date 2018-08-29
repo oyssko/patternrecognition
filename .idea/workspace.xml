@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5f9f1721-e4b3-41de-9cd0-478fdf335b6d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/patternrecognition.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/patternrecognition.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BayesianClassifierTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/BayesianClassifierTest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/patternrecognition/classifiers/bayes.py" beforeDir="false" afterPath="$PROJECT_DIR$/patternrecognition/classifiers/bayes.py" afterDir="false" />
@@ -15,7 +14,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/patternrecognition$BayesianClassifierTest.coverage" NAME="BayesianClassifierTest Coverage Results" MODIFIED="1535462934626" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/patternrecognition" />
-    <SUITE FILE_PATH="coverage/patternrecognition$BayesianClassifierTest__1_.coverage" NAME="BayesianClassifierTest (1) Coverage Results" MODIFIED="1535526211022" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/patternrecognition$BayesianClassifierTest__1_.coverage" NAME="BayesianClassifierTest (1) Coverage Results" MODIFIED="1535537256483" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -35,14 +34,15 @@
     <session id="-1011730545">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="14" />
-          <entry key="project.open.time.0" value="4" />
+          <entry key="project.closed" value="17" />
+          <entry key="project.open.time.0" value="5" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.3" value="4" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.open.time.5" value="1" />
+          <entry key="project.open.time.5" value="2" />
           <entry key="project.open.time.6" value="2" />
-          <entry key="project.opened" value="14" />
+          <entry key="project.open.time.7" value="1" />
+          <entry key="project.opened" value="17" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -57,14 +57,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="1610" />
+          <entry key="py" value="1620" />
           <entry key="txt" value="87" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="87" />
-          <entry key="Python" value="1610" />
+          <entry key="Python" value="1620" />
         </counts>
       </usages-collector>
     </session>
@@ -74,8 +74,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BayesianClassifierTest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1092">
-              <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
+            <state relative-caret-position="1281">
+              <caret line="61" selection-start-line="61" selection-end-line="61" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -86,30 +86,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/patternrecognition/classifiers/bayes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="388">
-              <caret line="184" lean-forward="true" selection-start-line="184" selection-end-line="184" />
+            <state relative-caret-position="126">
+              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
               <folding>
-                <element signature="e#824#955#0" />
-                <element signature="e#1359#2385#0" />
-                <element signature="e#1457#1543#0" />
-                <element signature="e#1714#2385#0" />
-                <element signature="e#1748#2080#0" />
-                <element signature="e#2115#2385#0" />
-                <element signature="e#3375#3633#0" />
-                <element signature="e#3888#4841#0" />
-                <element signature="e#4187#4841#0" />
-                <element signature="e#4335#4841#0" />
-                <element signature="e#4396#4838#0" />
-                <element signature="e#4442#4621#0" />
-                <element signature="e#4684#4842#0" />
-                <element signature="e#5282#6164#0" />
-                <element signature="e#5320#5380#0" />
-                <element signature="e#5506#5878#0" />
-                <element signature="e#5555#5878#0" />
-                <element signature="e#5604#5878#0" />
-                <element signature="e#6027#6164#0" />
-                <element signature="e#7125#7788#0" />
-                <element signature="e#7183#7295#0" />
+                <element signature="e#0#31#0" expanded="true" />
+                <element signature="e#5542#6403#0" />
+                <element signature="e#6844#7846#0" />
+                <element signature="e#8219#8882#0" />
               </folding>
             </state>
           </provider>
@@ -152,8 +135,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="741" />
-    <option name="width" value="1185" />
+    <option name="x" value="18" />
+    <option name="width" value="1908" />
     <option name="height" value="1032" />
   </component>
   <component name="ProjectView">
@@ -313,6 +296,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.17965023" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -330,12 +314,12 @@
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.3291815" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
-      <window_info anchor="right" x="0" y="0" width="273" height="495" id="Documentation" sideWeight="0.47229552" side_tool="true" visible="true" weight="0.080161944" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" sideWeight="0.49785408" weight="0.32955465" />
       <window_info anchor="right" x="0" y="11" width="1281" height="658" id="SciView" order="4" sideWeight="0.5277045" type="WINDOWED" weight="0.32955465" />
+      <window_info anchor="right" x="0" y="0" width="273" height="495" id="Documentation" order="5" sideWeight="0.47229552" side_tool="true" visible="true" weight="0.080161944" />
     </layout>
     <layout-to-restore>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17170112" />
@@ -424,8 +408,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BayesianClassifierTest.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1092">
-          <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
+        <state relative-caret-position="1281">
+          <caret line="61" selection-start-line="61" selection-end-line="61" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -434,30 +418,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/patternrecognition/classifiers/bayes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="184" lean-forward="true" selection-start-line="184" selection-end-line="184" />
+        <state relative-caret-position="126">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
           <folding>
-            <element signature="e#824#955#0" />
-            <element signature="e#1359#2385#0" />
-            <element signature="e#1457#1543#0" />
-            <element signature="e#1714#2385#0" />
-            <element signature="e#1748#2080#0" />
-            <element signature="e#2115#2385#0" />
-            <element signature="e#3375#3633#0" />
-            <element signature="e#3888#4841#0" />
-            <element signature="e#4187#4841#0" />
-            <element signature="e#4335#4841#0" />
-            <element signature="e#4396#4838#0" />
-            <element signature="e#4442#4621#0" />
-            <element signature="e#4684#4842#0" />
-            <element signature="e#5282#6164#0" />
-            <element signature="e#5320#5380#0" />
-            <element signature="e#5506#5878#0" />
-            <element signature="e#5555#5878#0" />
-            <element signature="e#5604#5878#0" />
-            <element signature="e#6027#6164#0" />
-            <element signature="e#7125#7788#0" />
-            <element signature="e#7183#7295#0" />
+            <element signature="e#0#31#0" expanded="true" />
+            <element signature="e#5542#6403#0" />
+            <element signature="e#6844#7846#0" />
+            <element signature="e#8219#8882#0" />
           </folding>
         </state>
       </provider>

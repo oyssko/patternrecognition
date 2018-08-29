@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
 from scipy.stats import multivariate_normal
+from scipy.spatial.distance import mahalanobis
 
 
 class BayesianClassifier2d(object):
@@ -52,14 +53,13 @@ class BayesianClassifier2d(object):
                 self.z.append(ztemp)
                 self.x.append(xtemp)
                 self.y.append(ytemp)
-                self.ax_true.scatter(self.x[num_class], self.y[num_class], self.z[num_class],
-                                     marker='*',c=tuple(self.color[num_class]))
+                self.ax_true.scatter(self.x[num_class], self.y[num_class], self.z[num_class], marker='*',
+                                     c=self.color[num_class])
             else:
                 xtemp, ytemp = self.samples[num_class].T
                 self.x.append(xtemp)
                 self.y.append(ytemp)
-                self.ax_true.scatter(self.x[num_class], self.y[num_class],
-                                     marker='*', c=tuple(self.color[num_class]))
+                self.ax_true.scatter(self.x[num_class], self.y[num_class], marker='*', c=tuple(self.color[num_class]))
 
     @staticmethod
     def generate_samples(meanVal, covariance, numberSam):
@@ -68,10 +68,14 @@ class BayesianClassifier2d(object):
         return samples
 
     @staticmethod
-    def distance(mean, feature, method='euclidean'):
+    def distance(mean, vector, covariance, method='euclidean'):
 
         if method == 'euclidean':
-            return np.linalg.norm(feature - mean)
+            return np.linalg.norm(vector - mean)
+
+        elif method == 'mahalanobis':
+            cov_inv = np.linalg.inv(covariance)
+            return mahalanobis(vector, mean, cov_inv)
         else:
             return print("Specify method or use default method (euclidean)")
 
@@ -88,11 +92,36 @@ class BayesianClassifier2d(object):
                                                                        self.mean[num_class],
                                                                        self.cov[num_class])
 
-    def prediction_of_data(self):
-        # This calculates the most probable class for each vector using Bayes Decision theory
+    def calculate_distance(self):
+        # Calculating distance for between the classes and each vector
+        self.vec_distance = np.zeros([self.classes, self.classes * self.num_samples])
+        # if the covariances are equal use euclidean distance
+        if all(x == self.cov[0] for x in self.cov):
+            for num_class in range(self.classes):
+                for i in range(self.classes * self.num_samples):
+                    self.vec_distance[num_class, i] = self.distance(self.mean[num_class],
+                                                                    self.combined[i], self.cov[0],
+                                                                    method='euclidean')
+        # if the covariances are not equal use mahalanobis distance
+        else:
+            for num_class in range(self.classes):
+                for i in range(self.classes * self.num_samples):
+                    self.vec_distance[num_class, i] = self.distance(self.mean[num_class],
+                                                                    self.combined[i], self.cov[num_class],
+                                                                    method='mahalanobis')
+        return self.vec_distance
 
+    def prediction_of_data(self, method='bayes'):
+        # This calculates the most probable class for each vector using Bayes Decision theory and distance
+        # measure
         # Predicted class
-        self.class_predict = self.probability.argmax(axis=0)
+        if method == 'bayes':
+            self.class_predict = self.probability.argmax(axis=0)
+        elif method == 'distance':
+            self.class_predict = self.vec_distance.argmin(axis=0)
+        else:
+            print('Choose method as either  \'bayes\' or \'distance\'')
+        #Display
         if self.display:
             self.fig_predict = plt.figure()
             if self.dim == 3:
@@ -100,17 +129,14 @@ class BayesianClassifier2d(object):
             else:
                 self.ax_predict = self.fig_predict.add_subplot(111)
             for num_class in range(self.classes):
-                if self.classes == 2:
-                    color = {0: 'r', 1: 'b'}
                 for i in range(self.class_predict.shape[0]):
                     if self.class_predict[i] == num_class:
-
                         if self.dim == 3:
                             self.ax_predict.scatter(self.combined[i][0], self.combined[i][1],
-                                                        self.combined[i][2], marker='*', c=self.color[num_class])
+                                                    self.combined[i][2], marker='*', c=self.color[num_class])
                         else:
                             self.ax_predict.scatter(self.combined[i][0], self.combined[i][1],
-                                                        marker='*', c=self.color[num_class])
+                                                    marker='*', c=self.color[num_class])
 
     def get_prediction(self, vector, display_pred=True):
         # This method takes in vectors and predicts what class it belongs to
@@ -126,6 +152,8 @@ class BayesianClassifier2d(object):
             else:
                 color = {0: 'r', 1: 'b'}
             for num_class in range(self.classes):
+                if self.classes != 2:
+                    color = list(np.random.choice(np.arange(0, 1, 0.01), size=3))
                 for i in range(len(vector)):
                     if pred[i] == num_class:
                         if self.classes == 2:
