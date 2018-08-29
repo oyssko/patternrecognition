@@ -1,17 +1,27 @@
-import numpy as np
 import matplotlib.pyplot as plt
-from mpltools import layout
+import numpy as np
+from mpl_toolkits.mplot3d import Axes3D
 from scipy.stats import multivariate_normal
 
 
-class BayesianClassifier2d:
+class BayesianClassifier2d(object):
     def __init__(self, mean, cov, num_samples, display=True):
         self.mean = mean
         self.cov = cov
         self.num_samples = num_samples
         self.samples = []
         self.classes = self.mean.__len__()
-        self.display = display
+        self.dim = len(self.mean[0][:])
+        self.color = []
+        # Generate colors
+        for i in range(self.classes):
+            color = list(np.random.choice(np.arange(0, 1, 0.01), size=3))
+            self.color.append(color)
+
+        if self.dim > 3:
+            self.display = False
+        else:
+            self.display = display
 
         # Generate samples
         for num_class in range(self.classes):
@@ -28,17 +38,28 @@ class BayesianClassifier2d:
 
     def display_true(self):
         # Display true classes
-
-        figsize = layout.figaspect(aspect_ratio=1)
-        self.fig_true, self.ax_true = plt.subplots(ncols=1, figsize=figsize)
+        self.fig_true = plt.figure()
+        if self.dim == 3:
+            self.z = []
+            self.ax_true = self.fig_true.add_subplot(111, projection='3d')
+        else:
+            self.ax_true = self.fig_true.add_subplot(111)
         self.x = []
         self.y = []
         for num_class in range(self.classes):
-            color = list(np.random.choice(np.arange(0, 1, 0.01), size=3))
-            xtemp, ytemp = self.samples[num_class].T
-            self.x.append(xtemp)
-            self.y.append(ytemp)
-            self.ax_true.plot(self.x[num_class], self.y[num_class], '*', c=tuple(color))
+            if self.dim == 3:
+                xtemp, ytemp, ztemp = self.samples[num_class].T
+                self.z.append(ztemp)
+                self.x.append(xtemp)
+                self.y.append(ytemp)
+                self.ax_true.scatter(self.x[num_class], self.y[num_class], self.z[num_class],
+                                     marker='*',c=tuple(self.color[num_class]))
+            else:
+                xtemp, ytemp = self.samples[num_class].T
+                self.x.append(xtemp)
+                self.y.append(ytemp)
+                self.ax_true.scatter(self.x[num_class], self.y[num_class],
+                                     marker='*', c=tuple(self.color[num_class]))
 
     @staticmethod
     def generate_samples(meanVal, covariance, numberSam):
@@ -46,7 +67,8 @@ class BayesianClassifier2d:
         samples = np.random.multivariate_normal(meanVal, covariance, numberSam)
         return samples
 
-    def distance(self, mean, feature, method='euclidean'):
+    @staticmethod
+    def distance(mean, feature, method='euclidean'):
 
         if method == 'euclidean':
             return np.linalg.norm(feature - mean)
@@ -59,25 +81,64 @@ class BayesianClassifier2d:
         return probability
 
     def calculate_probability(self):
-        # Retrieving the probability for each point
+        # Retrieving the probability for belonging to each class for each vectot
         self.probability = np.zeros([self.classes, self.classes * self.num_samples])
         for num_class in range(self.classes):
             self.probability[num_class, :] = self.gaussian_probability(self.combined,
                                                                        self.mean[num_class],
                                                                        self.cov[num_class])
 
-    def predict_data(self):
+    def prediction_of_data(self):
+        # This calculates the most probable class for each vector using Bayes Decision theory
 
-        self.figure_predict = plt.figure()
-        self.ax_predict = self.figure_predict.add_subplot(111)
+        # Predicted class
         self.class_predict = self.probability.argmax(axis=0)
-
         if self.display:
+            self.fig_predict = plt.figure()
+            if self.dim == 3:
+                self.ax_predict = self.fig_predict.add_subplot(111, projection='3d')
+            else:
+                self.ax_predict = self.fig_predict.add_subplot(111)
             for num_class in range(self.classes):
-                color = list(np.random.choice(np.arange(0, 1, 0.01), size=3))
+                if self.classes == 2:
+                    color = {0: 'r', 1: 'b'}
                 for i in range(self.class_predict.shape[0]):
                     if self.class_predict[i] == num_class:
-                        self.ax_predict.scatter(self.combined[i][0], self.combined[i][1], marker='*', c=tuple(color))
+
+                        if self.dim == 3:
+                            self.ax_predict.scatter(self.combined[i][0], self.combined[i][1],
+                                                        self.combined[i][2], marker='*', c=self.color[num_class])
+                        else:
+                            self.ax_predict.scatter(self.combined[i][0], self.combined[i][1],
+                                                        marker='*', c=self.color[num_class])
+
+    def get_prediction(self, vector, display_pred=True):
+        # This method takes in vectors and predicts what class it belongs to
+        prob = np.zeros([self.classes, len(vector)])
+        for num_class in range(self.classes):
+            prob[num_class, :] = self.gaussian_probability(vector, self.mean[num_class], self.cov[num_class])
+        pred = prob.argmax(axis=0)
+        # Display below
+        if display_pred:
+            if self.classes != 2:
+                fig = plt.figure()
+                ax = fig.add_subplot(111)
+            else:
+                color = {0: 'r', 1: 'b'}
+            for num_class in range(self.classes):
+                for i in range(len(vector)):
+                    if pred[i] == num_class:
+                        if self.classes == 2:
+                            self.ax_predict.scatter(vector[i][0], vector[i][1], marker='o', c=color[num_class])
+                        else:
+                            ax.scatter(vector[i][0], vector[i][1], marker='o', c=tuple(self.color[num_class]))
+            max_val = np.amax(self.combined[::])
+            min_val = np.amin(self.combined[::])
+            if self.classes != 2:
+                ax.set_ylim(min_val, max_val)
+                ax.set_xlim(min_val, max_val)
+                ax.set_title('Predictions from unknown data')
+        return pred
 
     def accuracy(self):
 
@@ -103,9 +164,10 @@ class BayesianClassifier2d:
     def visualize(self):
         # Display the true classes and the predicted classes
         if self.display:
-            if self.classes == 2:
+            if (self.classes == 2) & (self.dim != 3):
                 bound = self.boundary()
                 self.ax_predict.contourf(self.xb, self.yb, bound, alpha=0.3, cmap='jet')
+
             self.display_true()
             max_val = np.amax(self.combined[::])
             min_val = np.amin(self.combined[::])
@@ -113,6 +175,10 @@ class BayesianClassifier2d:
             self.ax_predict.set_xlim(min_val, max_val)
             self.ax_true.set_ylim(min_val, max_val)
             self.ax_true.set_xlim(min_val, max_val)
-            self.ax_predict.set_title('Predictions')
+            self.ax_predict.set_title('Predictions from known data')
             self.ax_true.set_title('True distribution')
             plt.show()
+        elif self.dim > 3:
+            print('Can not visualize more than 3 dimensions ')
+        else:
+            print('Display is False')
