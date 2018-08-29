@@ -6,10 +6,12 @@ from scipy.spatial.distance import mahalanobis
 
 
 class BayesianClassifier2d(object):
-    def __init__(self, mean, cov, num_samples, display=True):
+    def __init__(self, mean, cov, num_samples, risk_mat=None, display=True, name = None):
         self.mean = mean
         self.cov = cov
         self.num_samples = num_samples
+        self.risk_mat = risk_mat
+        self.name = name
         self.samples = []
         self.classes = self.mean.__len__()
         self.dim = len(self.mean[0][:])
@@ -86,17 +88,25 @@ class BayesianClassifier2d(object):
 
     def calculate_probability(self):
         # Retrieving the probability for belonging to each class for each vectot
-        self.probability = np.zeros([self.classes, self.classes * self.num_samples])
-        for num_class in range(self.classes):
-            self.probability[num_class, :] = self.gaussian_probability(self.combined,
-                                                                       self.mean[num_class],
-                                                                       self.cov[num_class])
+        if self.risk_mat is None:
+            self.probability = np.zeros([self.classes, self.classes * self.num_samples])
+            for num_class in range(self.classes):
+                self.probability[num_class, :] = self.gaussian_probability(self.combined,
+                                                                           self.mean[num_class],
+                                                                           self.cov[num_class])
+        else:
+            self.probability = np.zeros([self.classes, self.classes * self.num_samples])
+            for i in range(self.classes):
+                for j in range(self.classes):
+                    self.probability[i, :] += self.risk_mat[i, j] * self.gaussian_probability(self.combined,
+                                                                                              self.mean[i],
+                                                                                              self.cov[i])
 
     def calculate_distance(self):
         # Calculating distance for between the classes and each vector
         self.vec_distance = np.zeros([self.classes, self.classes * self.num_samples])
         # if the covariances are equal use euclidean distance
-        if all(x == self.cov[0] for x in self.cov):
+        if all(np.array_equal(self.cov[0], x) for x in self.cov):
             for num_class in range(self.classes):
                 for i in range(self.classes * self.num_samples):
                     self.vec_distance[num_class, i] = self.distance(self.mean[num_class],
@@ -171,7 +181,7 @@ class BayesianClassifier2d(object):
     def accuracy(self):
 
         accurate = sum(self.class_predict == self.trueClass) / (self.classes * self.num_samples)
-        print('The accuracy is %s' % (accurate,))
+        print(self.name, ': The accuracy is %s' % (accurate,))
 
         return accurate
 
