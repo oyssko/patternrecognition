@@ -1,5 +1,5 @@
 import numpy as np
-from patternrecognition.classifiers import BayesianClassifier2d
+from patternrecognition.classifiers import BayesianClassifier
 from sklearn.datasets import make_spd_matrix
 
 mean3d = [[1.0, 1.0, 1.0],
@@ -47,18 +47,18 @@ np.fill_diagonal(risk_mat, 0)
 
 risk_mat2d = np.array([[0, 1], [0.7, 0]])
 
-bayes3D = BayesianClassifier2d(mean3d, cov3d, number_of_samples, name='bayes3d')
+bayes3D = BayesianClassifier(mean3d, cov3d, number_of_samples, name='bayes3d')
 bayes3D.prediction_of_data(method='distance')
 bayes3D.accuracy()
 bayes3D.visualize()
 
 
-testBayes_distance = BayesianClassifier2d(meanRand, covRand, number_of_samples, name='distance classifier')
+testBayes_distance = BayesianClassifier(meanRand, covRand, number_of_samples, name='distance classifier')
 testBayes_distance.prediction_of_data(method='distance')
 testBayes_distance.accuracy()
 testBayes_distance.visualize()
 
-testBayes_bayes = BayesianClassifier2d(meanRand, covRand, number_of_samples, risk_mat=risk_mat,
+testBayes_bayes = BayesianClassifier(meanRand, covRand, number_of_samples, risk_mat=risk_mat,
                                        name='bayes decision with risk')
 testBayes_bayes.prediction_of_data(method='bayes')
 testBayes_bayes.accuracy()

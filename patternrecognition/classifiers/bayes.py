@@ -5,7 +5,7 @@ from scipy.stats import multivariate_normal
 from scipy.spatial.distance import mahalanobis
 
 
-class BayesianClassifier2d(object):
+class BayesianClassifier(object):
     def __init__(self, mean, cov, num_samples, risk_mat=None, display=True, name = None):
         self.mean = mean
         self.cov = cov
