@@ -98,7 +98,7 @@ class BayesianClassifier(object):
             self.probability = np.zeros([self.classes, self.classes * self.num_samples])
             for i in range(self.classes):
                 for j in range(self.classes):
-                    self.probability[i, :] += self.risk_mat[i, j] * self.gaussian_probability(self.combined,
+                    self.probability[i, :] += self.risk_mat[j, i] * self.gaussian_probability(self.combined,
                                                                                               self.mean[i],
                                                                                               self.cov[i])
 
@@ -181,7 +181,7 @@ class BayesianClassifier(object):
 
     def accuracy(self):
 
-        accurate = sum(self.class_predict == self.trueClass) / (self.classes * self.num_samples)
+        accurate = np.mean(self.class_predict == self.trueClass)
         print(self.name, ': The accuracy is %s' % (accurate,))
 
         return accurate
