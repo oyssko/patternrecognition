@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5f9f1721-e4b3-41de-9cd0-478fdf335b6d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/BayesianClassifierTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/BayesianClassifierTest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/patternrecognition/classifiers/bayes.py" beforeDir="false" afterPath="$PROJECT_DIR$/patternrecognition/classifiers/bayes.py" afterDir="false" />
+    <list default="true" id="5f9f1721-e4b3-41de-9cd0-478fdf335b6d" name="Default Changelist" comment="MUCH SPEED (thx np.mean (and christian))">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,7 +12,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/patternrecognition$BayesianClassifierTest.coverage" NAME="BayesianClassifierTest Coverage Results" MODIFIED="1535462934626" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/patternrecognition" />
-    <SUITE FILE_PATH="coverage/patternrecognition$BayesianClassifierTest__1_.coverage" NAME="BayesianClassifierTest (1) Coverage Results" MODIFIED="1535563002787" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/patternrecognition$BayesianClassifierTest__1_.coverage" NAME="BayesianClassifierTest (1) Coverage Results" MODIFIED="1535575674603" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -33,48 +32,51 @@
     <session id="-1011730545">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="19" />
-          <entry key="project.open.time.0" value="7" />
+          <entry key="project.closed" value="25" />
+          <entry key="project.open.time.0" value="10" />
           <entry key="project.open.time.2" value="1" />
-          <entry key="project.open.time.3" value="4" />
-          <entry key="project.open.time.4" value="1" />
+          <entry key="project.open.time.3" value="5" />
+          <entry key="project.open.time.4" value="3" />
           <entry key="project.open.time.5" value="2" />
           <entry key="project.open.time.6" value="2" />
           <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="19" />
+          <entry key="project.opened" value="25" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="19" />
+          <entry key="pstat" value="6" />
+          <entry key="py" value="21" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="19" />
+          <entry key="Profiler Session" value="6" />
+          <entry key="Python" value="21" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="1620" />
-          <entry key="txt" value="87" />
+          <entry key="py" value="6045" />
+          <entry key="txt" value="370" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="87" />
-          <entry key="Python" value="1620" />
+          <entry key="PLAIN_TEXT" value="370" />
+          <entry key="Python" value="6045" />
         </counts>
       </usages-collector>
+      <usages-collector id="statistics.js.language.service.starts" />
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BayesianClassifierTest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="31">
-              <caret line="49" column="78" selection-start-line="49" selection-start-column="78" selection-end-line="49" selection-end-column="78" />
+            <state relative-caret-position="276">
+              <caret line="38" column="66" lean-forward="true" selection-start-line="38" selection-start-column="66" selection-end-line="38" selection-end-column="66" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -82,15 +84,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/patternrecognition/classifiers/bayes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="205">
-              <caret line="223" selection-start-line="223" selection-end-line="223" />
+            <state relative-caret-position="-2769">
+              <caret line="126" column="55" lean-forward="true" selection-start-line="126" selection-start-column="55" selection-end-line="126" selection-end-column="55" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
-                <element signature="e#9535#10198#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/patternrecognition/classifiers/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="21">
+              <caret line="1" selection-start-line="1" selection-end-line="1" />
             </state>
           </provider>
         </entry>
@@ -104,9 +114,16 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>print</find>
+      <find>self.name</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
+        <option value="oystein &lt;oystein.skogvold@hotmail.no&gt;" />
         <option value="oyssko &lt;42174401+oyssko@users.noreply.github.com&gt;" />
       </list>
     </option>
@@ -117,9 +134,9 @@
       <list>
         <option value="$PROJECT_DIR$/SVMtest.py" />
         <option value="$PROJECT_DIR$/patternrecognition/classifiers/svm.py" />
-        <option value="$PROJECT_DIR$/patternrecognition/classifiers/__init__.py" />
         <option value="$PROJECT_DIR$/patternrecognition/BayesianClassifierTest.py" />
         <option value="$PROJECT_DIR$/patternrecognition/BayesianClassiierTest.py" />
+        <option value="$PROJECT_DIR$/patternrecognition/classifiers/__init__.py" />
         <option value="$PROJECT_DIR$/patternrecognition/classifiers/bayes.py" />
         <option value="$PROJECT_DIR$/BayesianClassifierTest.py" />
       </list>
@@ -131,8 +148,9 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="18" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="4" />
+    <option name="y" value="1" />
     <option name="width" value="1908" />
     <option name="height" value="1032" />
   </component>
@@ -279,7 +297,28 @@
       <option name="project" value="LOCAL" />
       <updated>1535069753229</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Changed name of class from BayesianClassifier2d to BayesianClassifier">
+      <created>1535563977912</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1535563977912</updated>
+    </task>
+    <task id="LOCAL-00003" summary="MUCH SPEED (thx np.mean (and christian))">
+      <created>1535572441294</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1535572441294</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Corrected the distance measure, as it only applies for diagonal and non-diagonal matrices. Updated get_prediction() method">
+      <created>1535643833488</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1535643833488</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView">
@@ -292,21 +331,21 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <frame x="3" y="1" width="1272" height="688" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.17965023" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.24880762" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32562277" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39679715" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.0" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.45765767" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.08007117" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.3291815" />
-      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.07927928" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32792792" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32972974" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.3291815" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
@@ -314,9 +353,10 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Database" order="3" sideWeight="0.49785408" weight="0.32955465" />
-      <window_info active="true" anchor="right" x="0" y="23" width="1281" height="658" id="SciView" order="4" sideWeight="0.5277045" type="WINDOWED" visible="true" weight="0.32955465" />
-      <window_info anchor="right" x="0" y="0" width="273" height="495" id="Documentation" order="5" sideWeight="0.47229552" side_tool="true" visible="true" weight="0.080161944" />
+      <window_info anchor="right" id="Database" order="3" sideWeight="0.49625936" weight="0.32955465" />
+      <window_info anchor="right" x="0" y="11" width="1281" height="658" id="SciView" order="4" sideWeight="0.5277045" type="WINDOWED" weight="0.32955465" />
+      <window_info anchor="right" x="0" y="0" width="273" height="495" id="Documentation" order="5" sideWeight="0.50374067" side_tool="true" weight="0.32955465" />
+      <window_info anchor="right" id="Coverage" order="6" side_tool="true" />
     </layout>
     <layout-to-restore>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17170112" />
@@ -346,7 +386,10 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added test code and made some small changes to __init__.py file and svm module" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added test code and made some small changes to __init__.py file and svm module" />
+    <MESSAGE value="Changed name of class from BayesianClassifier2d to BayesianClassifier" />
+    <MESSAGE value="MUCH SPEED (thx np.mean (and christian))" />
+    <MESSAGE value="Corrected the distance measure, as it only applies for diagonal and non-diagonal matrices. Updated get_prediction() method" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrected the distance measure, as it only applies for diagonal and non-diagonal matrices. Updated get_prediction() method" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/svm.py" />
@@ -374,13 +417,6 @@
     <entry file="file://$PROJECT_DIR$/patternrecognition/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/patternrecognition/classifiers/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="42" selection-start-column="42" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/patternrecognition/classifiers/tests/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -403,23 +439,29 @@
     <entry file="file://$PROJECT_DIR$/setup.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/patternrecognition/classifiers/bayes.py">
+    <entry file="file://$PROJECT_DIR$/patternrecognition/classifiers/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="223" selection-start-line="223" selection-end-line="223" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-            <element signature="e#9535#10198#0" />
-          </folding>
+        <state relative-caret-position="21">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BayesianClassifierTest.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="31">
-          <caret line="49" column="78" selection-start-line="49" selection-start-column="78" selection-end-line="49" selection-end-column="78" />
+        <state relative-caret-position="276">
+          <caret line="38" column="66" lean-forward="true" selection-start-line="38" selection-start-column="66" selection-end-line="38" selection-end-column="66" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/patternrecognition/classifiers/bayes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2769">
+          <caret line="126" column="55" lean-forward="true" selection-start-line="126" selection-start-column="55" selection-end-line="126" selection-end-column="55" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
