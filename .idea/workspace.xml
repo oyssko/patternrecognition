@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5f9f1721-e4b3-41de-9cd0-478fdf335b6d" name="Default Changelist" comment="MUCH SPEED (thx np.mean (and christian))">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BayesianClassifierTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/BayesianClassifierTest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/patternrecognition/classifiers/bayes.py" beforeDir="false" afterPath="$PROJECT_DIR$/patternrecognition/classifiers/bayes.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,15 +34,15 @@
     <session id="-1011730545">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="25" />
+          <entry key="project.closed" value="32" />
           <entry key="project.open.time.0" value="10" />
           <entry key="project.open.time.2" value="1" />
-          <entry key="project.open.time.3" value="5" />
-          <entry key="project.open.time.4" value="3" />
-          <entry key="project.open.time.5" value="2" />
-          <entry key="project.open.time.6" value="2" />
+          <entry key="project.open.time.3" value="7" />
+          <entry key="project.open.time.4" value="4" />
+          <entry key="project.open.time.5" value="5" />
+          <entry key="project.open.time.6" value="3" />
           <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="25" />
+          <entry key="project.opened" value="32" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -57,14 +59,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="6045" />
+          <entry key="py" value="7130" />
           <entry key="txt" value="370" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="370" />
-          <entry key="Python" value="6045" />
+          <entry key="Python" value="7130" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts" />
@@ -75,8 +77,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BayesianClassifierTest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="38" column="66" lean-forward="true" selection-start-line="38" selection-start-column="66" selection-end-line="38" selection-end-column="66" />
+            <state relative-caret-position="24">
+              <caret line="59" column="3" selection-start-line="59" selection-start-column="3" selection-end-line="59" selection-end-column="3" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -87,8 +89,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/patternrecognition/classifiers/bayes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2769">
-              <caret line="126" column="55" lean-forward="true" selection-start-line="126" selection-start-column="55" selection-end-line="126" selection-end-column="55" />
+            <state relative-caret-position="2436">
+              <caret line="116" column="41" lean-forward="true" selection-start-line="116" selection-start-column="41" selection-end-line="116" selection-end-column="41" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -118,6 +120,7 @@
     <findStrings>
       <find>print</find>
       <find>self.name</find>
+      <find>.T</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -137,8 +140,8 @@
         <option value="$PROJECT_DIR$/patternrecognition/BayesianClassifierTest.py" />
         <option value="$PROJECT_DIR$/patternrecognition/BayesianClassiierTest.py" />
         <option value="$PROJECT_DIR$/patternrecognition/classifiers/__init__.py" />
-        <option value="$PROJECT_DIR$/patternrecognition/classifiers/bayes.py" />
         <option value="$PROJECT_DIR$/BayesianClassifierTest.py" />
+        <option value="$PROJECT_DIR$/patternrecognition/classifiers/bayes.py" />
       </list>
     </option>
   </component>
@@ -149,8 +152,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="4" />
-    <option name="y" value="1" />
+    <option name="x" value="3" />
     <option name="width" value="1908" />
     <option name="height" value="1032" />
   </component>
@@ -331,15 +333,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="3" y="1" width="1272" height="688" extended-state="0" />
-    <editor active="true" />
+    <frame x="2" y="0" width="1272" height="688" extended-state="0" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.17965023" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.24880762" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.0" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.2936937" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.45765767" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -448,8 +449,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/BayesianClassifierTest.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="38" column="66" lean-forward="true" selection-start-line="38" selection-start-column="66" selection-end-line="38" selection-end-column="66" />
+        <state relative-caret-position="24">
+          <caret line="59" column="3" selection-start-line="59" selection-start-column="3" selection-end-line="59" selection-end-column="3" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -458,8 +459,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/patternrecognition/classifiers/bayes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2769">
-          <caret line="126" column="55" lean-forward="true" selection-start-line="126" selection-start-column="55" selection-end-line="126" selection-end-column="55" />
+        <state relative-caret-position="2436">
+          <caret line="116" column="41" lean-forward="true" selection-start-line="116" selection-start-column="41" selection-end-line="116" selection-end-column="41" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>

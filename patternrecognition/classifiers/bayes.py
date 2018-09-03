@@ -41,6 +41,7 @@ class BayesianClassifier(object):
             sample = self.generate_samples(self.mean[num_class], self.cov[num_class], self.num_samples)
             self.samples.append(sample)
         # Combine samples
+
         self.combined = np.concatenate(self.samples)
 
         # Mark the true classes
@@ -96,6 +97,7 @@ class BayesianClassifier(object):
     def gaussian_probability(self, x, meanClass, covariance):
         # Calculates probability of x given mean and covariance
         probability = multivariate_normal.pdf(x, mean=meanClass, cov=covariance)
+        
         return probability
 
     def calculate_probability(self):
@@ -117,6 +119,7 @@ class BayesianClassifier(object):
                     self.probability[i, :] += self.risk_mat[j, i] * self.gaussian_probability(self.combined,
                                                                                               self.mean[i],
                                                                                               self.cov[i])
+
 
     def calculate_distance(self):
         # Calculating distance for between the classes and each vector
@@ -140,11 +143,6 @@ class BayesianClassifier(object):
     def prediction_of_data(self, method='bayes'):
         # This calculates the most probable class for each vector using Bayes Decision theory and distance
         # measure
-
-        # Use distance measure only if all the covariances for each class is equal:
-        if method == 'distance' and not all(np.array_equal(x, self.cov[0]) for x in self.cov):
-            print('classes must have same covariance matrix, method used is bayesian')
-            method = 'bayes'
 
         # Classify generated data according to specified methos
         if method == 'bayes':
@@ -180,11 +178,6 @@ class BayesianClassifier(object):
         # This method takes in vectors and predicts what class it belongs to
 
         prob = np.zeros([self.classes, len(vector)])
-
-        if method == 'distance' and not all(np.array_equal(x, self.cov[0]) for x in self.cov):
-            print('classes must have same covariance matrix, method used is bayesian')
-            method = 'bayes'
-
         # function for checking if matrix is diagonal
         def isdiag(M):
             return np.all(M == np.diag(np.diagonal(M)))
@@ -231,7 +224,7 @@ class BayesianClassifier(object):
 
     def accuracy(self):
         # Measured as correct classification divided by total vectors
-        accurate = np.mean(self.class_predict == self.trueClass)
+        accurate = np.mean(self.class_predict == self.trueClass) * 100
         if self.name is None:
             print('The accuracy is %s' % (accurate,))
         else:
@@ -274,3 +267,4 @@ class BayesianClassifier(object):
             print('Can not visualize more than 3 dimensions ')
         else:
             print('Display is False')
+
