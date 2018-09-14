@@ -1,2 +1,3 @@
 from patternrecognition.classifiers.svm import Support_Vector_Machine
 from patternrecognition.classifiers.bayes import BayesianClassifier
+from patternrecognition.classifiers.KNN import k_nearest_neighbor

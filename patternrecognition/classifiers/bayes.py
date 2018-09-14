@@ -16,16 +16,18 @@ class BayesianClassifier(object):
     Øystein F. Skogvold
 
     """
-    def __init__(self, mean, cov, num_samples, risk_mat=None, display=True, name = None):
+    def __init__(self, mean, cov, prior_prob, num_samples=None, risk_mat=None, generate_data=True, display=True, name=None):
         self.mean = mean    # List of mean vectors
         self.cov = cov  # List of covariance matrices
         self.num_samples = num_samples  # Number of samples for each class
         self.classes = self.mean.__len__() # Number of classes
+        self.prior_prob = prior_prob
         self.risk_mat = risk_mat    # Risk matrix, must be the size: self.samples X self.samples
         self.name = name    # Specified name of instance
         self.samples = []
         self.dim = len(self.mean[0][:]) # Dimension of feature space
         self.color = []
+        self.generate_data = generate_data
         # Generate colors
         for i in range(self.classes):
             color = list(np.random.choice(np.arange(0, 1, 0.01), size=3))
@@ -37,18 +39,20 @@ class BayesianClassifier(object):
             self.display = display
 
         # Generate samples
-        for num_class in range(self.classes):
-            sample = self.generate_samples(self.mean[num_class], self.cov[num_class], self.num_samples)
-            self.samples.append(sample)
+        if self.generate_data:
+            for num_class in range(self.classes):
+                sample = self.generate_samples(self.mean[num_class], self.cov[num_class], self.num_samples)
+                self.samples.append(sample)
         # Combine samples
 
-        self.combined = np.concatenate(self.samples)
+            self.combined = np.concatenate(self.samples)
 
         # Mark the true classes
-        self.trueClass = np.array_split(np.zeros([self.classes * self.num_samples]), self.classes)
-        for num_class in range(self.classes):
-            self.trueClass[num_class][:] = num_class
-        self.trueClass = np.concatenate(self.trueClass)
+            self.trueClass = np.array_split(np.zeros([self.classes * self.num_samples]), self.classes)
+            for num_class in range(self.classes):
+                self.trueClass[num_class][:] = num_class
+            self.trueClass = np.concatenate(self.trueClass)
+
 
     def display_true(self):
         # Display true classes
@@ -96,7 +100,7 @@ class BayesianClassifier(object):
 
     def gaussian_probability(self, x, meanClass, covariance):
         # Calculates probability of x given mean and covariance
-        probability = multivariate_normal.pdf(x, mean=meanClass, cov=covariance)
+        probability = multivariate_normal.pdf(x, mean=meanClass, cov=covariance, allow_singular=True)
         
         return probability
 
@@ -108,17 +112,29 @@ class BayesianClassifier(object):
             # Classify by minimizing class error probability
             self.probability = np.zeros([self.classes, self.classes * self.num_samples])
             for num_class in range(self.classes):
-                self.probability[num_class, :] = self.gaussian_probability(self.combined,
-                                                                           self.mean[num_class],
-                                                                           self.cov[num_class])
+                self.probability[num_class, :] = self.prior_prob[num_class] * self.gaussian_probability(self.combined,
+                                                                                                        self.mean[num_class],
+                                                                                                        self.cov[num_class])
         else:
             # Classify by minimizing average risk
             self.probability = np.zeros([self.classes, self.classes * self.num_samples])
             for i in range(self.classes):
                 for j in range(self.classes):
-                    self.probability[i, :] += self.risk_mat[j, i] * self.gaussian_probability(self.combined,
-                                                                                              self.mean[i],
-                                                                                              self.cov[i])
+                    self.probability[i, :] += self.risk_mat[j, i] * self.prior_prob[j] * self.gaussian_probability(self.combined,
+                                                                                              self.mean[j],
+                                                                                              self.cov[j])
+        if self.display:
+            self.figure_gauss = plt.figure()
+            self.ax_gauss = self.figure_gauss.add_subplot(111)
+
+            for i in range(self.classes):
+                self.ax_gauss.plot(self.combined[:, 0], self.probability[i, :], marker='o', linestyle='None',
+                                   c=self.color[i])
+                self.ax_gauss.plot(self.probability[i, :], self.combined[:, 1], marker='o', linestyle='None',
+                                   c=self.color[i])
+
+
+
 
 
     def calculate_distance(self):
@@ -148,7 +164,10 @@ class BayesianClassifier(object):
         if method == 'bayes':
             self.calculate_probability()
             # Highest probability is the classified class
-            self.class_predict = self.probability.argmax(axis=0)
+            if self.risk_mat is None:
+                self.class_predict = self.probability.argmax(axis=0)
+            else:
+                self.class_predict = self.probability.argmin(axis=0)
 
         elif method == 'distance':
             self.calculate_distance()
@@ -174,7 +193,7 @@ class BayesianClassifier(object):
                             self.ax_predict.scatter(self.combined[i][0], self.combined[i][1],
                                                     marker='*', c=self.color[num_class])
 
-    def get_prediction(self, vector, method='bayes', display_pred=True):
+    def get_prediction(self, vector, labelvector=None, method='bayes', display_pred=True):
         # This method takes in vectors and predicts what class it belongs to
 
         prob = np.zeros([self.classes, len(vector)])
@@ -186,7 +205,8 @@ class BayesianClassifier(object):
         if method == 'bayes':
 
             for num_class in range(self.classes):
-                prob[num_class, :] = self.gaussian_probability(vector, self.mean[num_class], self.cov[num_class])
+                prob[num_class, :] = self.prior_prob[num_class] * self.gaussian_probability(vector, self.mean[num_class],
+                                                                                            self.cov[num_class])
             pred = prob.argmax(axis=0)
 
         elif method == 'distance':
@@ -204,6 +224,9 @@ class BayesianClassifier(object):
             pred = prob.argmin(axis=0)
         else:
             print('define method')
+        if labelvector is not None:
+            accuracy = labelvector.T == pred
+
         # Display below
         # Display with diamond marker for unknown classes
         if display_pred:
@@ -217,10 +240,14 @@ class BayesianClassifier(object):
         elif method == 'distance':
             print('Classified with distance measure:')
 
-        for i in range(len(vector)):
-            print(pred[i], ':', vector[i][:])
 
-        return pred
+
+        if labelvector is not None:
+            return accuracy
+        else:
+            for i in range(len(vector)):
+                print(pred[i], ':', vector[i][:])
+            return pred
 
     def accuracy(self):
         # Measured as correct classification divided by total vectors
@@ -240,18 +267,21 @@ class BayesianClassifier(object):
         pos = np.empty(self.xb.shape + (2,))
         pos[:, :, 0] = self.xb
         pos[:, :, 1] = self.yb
-        Z1 = self.gaussian_probability(pos, self.mean[0], self.cov[0])
-        Z2 = self.gaussian_probability(pos, self.mean[1], self.cov[1])
-        # difference of Gaussians
-        Z = (Z2 - Z1)
-        return Z
+
+        Z = np.zeros(self.xb.shape + (self.classes,))
+        for i in range(self.classes):
+            Z[:, :, i] = self.gaussian_probability(pos, self.mean[i], self.cov[i])
+
+        Zdiff = np.diff(Z, n=self.classes-1, axis=2) * 100
+
+        return Zdiff
 
     def visualize(self):
         # Display the true classes and the predicted classes
         if self.display:
-            if (self.classes == 2) & (self.dim != 3):
+            if self.dim != 3:
                 bound = self.boundary()
-                self.ax_predict.contourf(self.xb, self.yb, bound, alpha=0.3, cmap='jet')
+                self.ax_predict.contourf(self.xb, self.yb, bound[:, :, 0], alpha=0.3, cmap='jet')
 
             self.display_true()
             max_val = np.amax(self.combined[::])
@@ -260,6 +290,8 @@ class BayesianClassifier(object):
             self.ax_predict.set_xlim(min_val, max_val)
             self.ax_true.set_ylim(min_val, max_val)
             self.ax_true.set_xlim(min_val, max_val)
+            self.ax_gauss.set_ylim(min_val, max_val)
+            self.ax_gauss.set_xlim(min_val, max_val)
             self.ax_predict.set_title('Predictions from known data')
             self.ax_true.set_title('True distribution')
             plt.show()
