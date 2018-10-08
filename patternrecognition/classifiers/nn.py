@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-
+from tqdm import tqdm
 # Seed the random function to ensure that we always get the same result
 
 def plot_decision_boundary(pred_func, data, label):
@@ -14,8 +14,8 @@ def plot_decision_boundary(pred_func, data, label):
     Z = pred_func(np.c_[xx.ravel(), yy.ravel()])
     Z = Z.reshape(xx.shape)
     # Plot the contour and training examples
-    plt.contourf(xx, yy, Z, cmap='Spectral')
-    plt.scatter(data[:, 0], data[:, 1], c=label, cmap='Spectral')
+    plt.contourf(xx, yy, Z, cmap='Spectral', alpha=0.3)
+    plt.scatter(data[:, 0], data[:, 1], c=label, cmap='Spectral', edgecolors='k')
 
 
 class NeuralNetwork:
@@ -85,11 +85,11 @@ class NeuralNetwork:
         return self.out
 
     def prediction(self, data, conf=False):
-
+        # Prediction function -> returns 0 for class 1 and 1 for class 2
         out = self.feedforward(data)
 
         self.predict = np.argmax(out[len(out)-1], axis=1)
-
+        # Confidence of prediction:
         if conf:
             confidence = np.max(out[len(out)-1], axis=1) / np.sum(out[len(out)-1], axis=1)
 
@@ -128,10 +128,10 @@ class NeuralNetwork:
 
         return er
 
-    def training(self, data, label, learning, epochs=2000, marker=1000):
+    def training(self, data, label, learning, epochs=2000, marker=1000, breakpoint=0.05):
         error = []
-        plotx = range(int(epochs/marker))
-        for epoch in range(epochs):
+        bar = tqdm(range(epochs))
+        for epoch in bar:
             idx = np.random.permutation(len(label))
             data, label = data[idx], label[idx]
 
@@ -139,10 +139,17 @@ class NeuralNetwork:
             er = self.backpropagation(data, label, learning)
 
             if epoch % marker == 0:
-                print('Error after ', epoch,"epochs: ", er)
+                bar.set_description("Error: %f" %er)
+                bar.update()
                 error.append(er)
+            if er < breakpoint:
+                bar.close()
+                break
 
+
+        print("\n Broke out of for loop with ", er, "Error")
         error = np.asarray(error, dtype=np.float64)
+        plotx = range(len(error))
         plt.figure()
         plt.plot(plotx, error)
         plt.xlabel("every %i epoch" %marker)
